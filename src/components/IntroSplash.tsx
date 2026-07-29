@@ -1,4 +1,4 @@
-import { CSSProperties, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 const SESSION_NOKKEL = "bryllup:intro-vist";
 
@@ -11,16 +11,11 @@ export function skalViseIntro(): boolean {
   }
 }
 
-const KONFETTI_FARGER = ["#b08d57", "#d7bd94", "#5c6e50", "#8a9a7d", "#2d3a66", "#ffffff", "#e8b4c8"];
-
-const PYNT = [
-  { emoji: "💍", klasse: "left-[10%] top-[12%] text-3xl", delay: "0s" },
-  { emoji: "✨", klasse: "right-[12%] top-[18%] text-2xl", delay: "0.7s" },
-  { emoji: "🌸", klasse: "left-[16%] bottom-[22%] text-2xl", delay: "1.3s" },
-  { emoji: "🕊️", klasse: "right-[14%] bottom-[28%] text-3xl", delay: "0.4s" },
-  { emoji: "✨", klasse: "left-[38%] top-[7%] text-xl", delay: "1.8s" },
-];
-
+/**
+ * Elegant konvoluttåpning: invitasjonskortet ligger kant til kant,
+ * og ved trykk løftes det rolig opp og bort som et papirark –
+ * siden under kommer til syne.
+ */
 export default function IntroSplash({ onFerdig }: { onFerdig: () => void }) {
   const [aapner, setAapner] = useState(false);
 
@@ -31,24 +26,6 @@ export default function IntroSplash({ onFerdig }: { onFerdig: () => void }) {
     };
   }, []);
 
-  const konfetti = useMemo(() => {
-    if (!aapner) return [];
-    return Array.from({ length: 44 }, (_, i) => {
-      const vinkel = Math.random() * Math.PI * 2;
-      const fart = 130 + Math.random() * 280;
-      return {
-        id: i,
-        stil: {
-          background: KONFETTI_FARGER[i % KONFETTI_FARGER.length],
-          animationDelay: `${Math.random() * 0.12}s`,
-          "--dx": `${Math.cos(vinkel) * fart}px`,
-          "--dy": `${Math.sin(vinkel) * fart - 130}px`,
-          "--rot": `${Math.round((Math.random() - 0.5) * 720)}deg`,
-        } as CSSProperties,
-      };
-    });
-  }, [aapner]);
-
   const aapne = () => {
     if (aapner) return;
     setAapner(true);
@@ -57,45 +34,31 @@ export default function IntroSplash({ onFerdig }: { onFerdig: () => void }) {
     } catch {
       // sessionStorage utilgjengelig – vis introen igjen neste gang
     }
-    setTimeout(onFerdig, 1150);
+    setTimeout(onFerdig, 1600);
   };
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex cursor-pointer items-center justify-center overflow-hidden bg-cream-100 ${
-        aapner ? "intro-bakgrunn-ut" : ""
-      }`}
+      className={`intro-scene fixed inset-0 z-[100] cursor-pointer bg-cream-100 ${aapner ? "intro-bakteppe-ut" : ""}`}
       onClick={aapne}
       role="button"
       aria-label="Åpne invitasjonen"
     >
-      {/* Svevende pynt rundt kortet */}
-      {!aapner &&
-        PYNT.map((p, i) => (
-          <span key={i} aria-hidden className={`intro-svev absolute ${p.klasse}`} style={{ animationDelay: p.delay }}>
-            {p.emoji}
-          </span>
-        ))}
-
-      {/* Selve invitasjonskortet */}
-      <div className={`relative mx-6 ${aapner ? "intro-ut" : "intro-inn"}`}>
+      <div className={`h-full w-full ${aapner ? "intro-flapp-aapner" : "intro-myk-inn"}`}>
         <img
           src={import.meta.env.BASE_URL + "bilder/intro-konvolutt.jpg"}
           alt="Invitasjon: Richard & Jennie, 7. august 2027, Strømsgodset kirke"
-          className="max-h-[78vh] w-auto max-w-full rounded-2xl shadow-2xl"
+          className="h-full w-full object-contain portrait:object-cover"
           draggable={false}
         />
-        {/* Konfetti spruter fra seglet når man åpner */}
-        {konfetti.map((k) => (
-          <span key={k.id} aria-hidden className="intro-konfetti" style={k.stil} />
-        ))}
+        {/* Myk papirskygge langs bunnen mens arket løftes */}
+        <div className={`pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-sage-900/25 to-transparent ${aapner ? "opacity-100" : "opacity-0"} transition-opacity duration-500`} />
       </div>
 
-      {/* Hint nederst */}
       {!aapner && (
-        <div className="intro-hint pointer-events-none absolute inset-x-0 bottom-8 text-center">
-          <span className="rounded-full bg-sage-800/90 px-6 py-3 font-medium text-cream-50 shadow-lg backdrop-blur">
-            Trykk for å åpne invitasjonen 💌
+        <div className="intro-hint-elegant pointer-events-none absolute inset-x-0 bottom-8 text-center">
+          <span className="font-display rounded-full bg-white/75 px-6 py-2.5 text-lg italic tracking-wide text-sage-800 shadow-sm backdrop-blur-sm">
+            Trykk for å åpne invitasjonen
           </span>
         </div>
       )}

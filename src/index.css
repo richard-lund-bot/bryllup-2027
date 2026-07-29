@@ -53,69 +53,46 @@ body {
   font-family: var(--font-serif);
 }
 
-/* Intro-splash («candy crush»-åpning av invitasjonen) */
-@keyframes intro-pop-inn {
-  0% { transform: scale(0.55) rotate(-5deg); opacity: 0; }
-  60% { transform: scale(1.06) rotate(1.5deg); opacity: 1; }
-  80% { transform: scale(0.97) rotate(-0.5deg); }
-  100% { transform: scale(1) rotate(0deg); }
+/* Intro: elegant konvoluttåpning kant til kant */
+.intro-scene {
+  perspective: 1500px;
+  overflow: hidden;
 }
-@keyframes intro-puls {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.02) rotate(0.6deg); }
+@keyframes intro-myk-inn-anim {
+  from { opacity: 0; transform: scale(1.03); }
+  to { opacity: 1; transform: scale(1); }
 }
-.intro-inn {
-  animation:
-    intro-pop-inn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both,
-    intro-puls 3.2s ease-in-out 0.9s infinite;
+.intro-myk-inn {
+  animation: intro-myk-inn-anim 0.9s ease-out both;
 }
-@keyframes intro-zoom-ut {
-  0% { transform: scale(1) rotate(0deg); opacity: 1; }
-  30% { transform: scale(1.1) rotate(2deg); opacity: 1; }
-  100% { transform: scale(1.8) rotate(-4deg); opacity: 0; }
+/* Arket løftes rolig opp og over toppkanten, som når man åpner en konvolutt */
+@keyframes intro-flapp-anim {
+  0% { transform: rotateX(0deg); filter: brightness(1); }
+  55% { filter: brightness(0.92); }
+  100% { transform: rotateX(150deg); filter: brightness(0.8); }
 }
-.intro-ut {
-  animation: intro-zoom-ut 1s cubic-bezier(0.5, -0.28, 0.4, 1) both;
+.intro-flapp-aapner {
+  transform-origin: 50% 0%;
+  backface-visibility: hidden;
+  will-change: transform;
+  animation: intro-flapp-anim 1.5s cubic-bezier(0.6, 0.05, 0.25, 1) both;
 }
-@keyframes intro-fade-ut {
+@keyframes intro-bakteppe-ut-anim {
   to { opacity: 0; }
 }
-.intro-bakgrunn-ut {
-  animation: intro-fade-ut 0.85s ease 0.3s both;
+.intro-bakteppe-ut {
+  animation: intro-bakteppe-ut-anim 0.8s ease 0.7s both;
   pointer-events: none;
 }
-@keyframes intro-hint-hopp {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-8px) scale(1.05); }
+@keyframes intro-hint-pust {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.45; }
 }
-.intro-hint {
-  animation: intro-hint-hopp 1.6s ease-in-out infinite;
-}
-@keyframes intro-svev-anim {
-  0%, 100% { transform: translateY(0) rotate(-6deg); opacity: 0.75; }
-  50% { transform: translateY(-14px) rotate(8deg); opacity: 1; }
-}
-.intro-svev {
-  animation: intro-svev-anim 3s ease-in-out infinite;
-}
-.intro-konfetti {
-  position: absolute;
-  left: 50%;
-  top: 42%;
-  width: 9px;
-  height: 13px;
-  border-radius: 2px;
-  animation: intro-konfetti-burst 0.95s ease-out both;
-}
-@keyframes intro-konfetti-burst {
-  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); opacity: 1; }
-  100% {
-    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)) scale(0.5);
-    opacity: 0;
-  }
+.intro-hint-elegant {
+  animation: intro-hint-pust 2.8s ease-in-out infinite;
 }
 @media (prefers-reduced-motion: reduce) {
-  .intro-inn, .intro-ut, .intro-hint, .intro-svev, .intro-konfetti {
+  .intro-myk-inn, .intro-flapp-aapner, .intro-hint-elegant {
     animation-duration: 0.01s !important;
     animation-iteration-count: 1 !important;
   }

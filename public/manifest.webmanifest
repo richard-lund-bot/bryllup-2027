@@ -1,0 +1,14 @@
+{
+  "name": "Richard & Jennie – Bryllup 2027",
+  "short_name": "Bryllup 2027",
+  "description": "Invitasjon og planlegging for bryllupet 7. august 2027",
+  "start_url": "/bryllup-2027/",
+  "scope": "/bryllup-2027/",
+  "display": "standalone",
+  "background_color": "#faf6ee",
+  "theme_color": "#37432f",
+  "icons": [
+    { "src": "/bryllup-2027/ikon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/bryllup-2027/ikon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
