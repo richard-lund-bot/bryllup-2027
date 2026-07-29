@@ -29,10 +29,13 @@ html {
 }
 
 /* Siden skal aldri kunne rulles sideveis – brede tabeller ruller i egen
-   kontainer (overflow-x-auto), ikke hele siden */
+   kontainer (overflow-x-auto), ikke hele siden. clip i tillegg til hidden
+   fordi iOS Safari ignorerer hidden ved touch-panorering. */
 html,
 body {
   overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 /* Slå av dobbelttrykk-zoom (panorering og scrolling påvirkes ikke) */

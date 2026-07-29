@@ -22,6 +22,14 @@
         },
         { passive: false }
       );
+      // Vaktpost: skulle siden likevel drive sideveis, nullstilles den straks
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (window.scrollX !== 0) window.scrollTo(0, window.scrollY);
+        },
+        { passive: true }
+      );
     </script>
     <script>
       // GitHub Pages SPA-triks: dekoder redirect fra 404.html

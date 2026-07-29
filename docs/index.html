@@ -22,6 +22,14 @@
         },
         { passive: false }
       );
+      // Vaktpost: skulle siden likevel drive sideveis, nullstilles den straks
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (window.scrollX !== 0) window.scrollTo(0, window.scrollY);
+        },
+        { passive: true }
+      );
     </script>
     <script>
       // GitHub Pages SPA-triks: dekoder redirect fra 404.html
@@ -38,8 +46,8 @@
         }
       })(window.location);
     </script>
-    <script type="module" crossorigin src="/bryllup-2027/assets/index-BDoB8S3-.js"></script>
-    <link rel="stylesheet" crossorigin href="/bryllup-2027/assets/index-CTWEfzF7.css">
+    <script type="module" crossorigin src="/bryllup-2027/assets/index-CC88QcgU.js"></script>
+    <link rel="stylesheet" crossorigin href="/bryllup-2027/assets/index-DHNehZkz.css">
   </head>
   <body>
     <div id="root"></div>
