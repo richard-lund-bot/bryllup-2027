@@ -1,26 +1,23 @@
 name: Bygg nettsiden til docs
 
-# Bygger siden og committer resultatet til docs/ på main.
-# GitHub Pages er satt opp til å servere main:/docs.
+# Nettsiden serveres fra docs/ på main (GitHub Pages: main:/docs).
+# docs/ bygges og committes normalt sammen med kodeendringene
+# (npm run build). Denne workflowen er kun en manuell reserveløsning
+# hvis docs/ skulle komme ut av sync med kildekoden.
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
   contents: write
   pages: write
 
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: 22

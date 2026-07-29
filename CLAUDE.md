@@ -52,6 +52,12 @@ npm run dev      # lokal utvikling (http://localhost:5173/bryllup-2027/)
 npm run build    # typesjekk + produksjonsbygg (kjør alltid før push)
 ```
 
+VIKTIG: Nettsiden serveres fra `docs/` på `main` (GitHub Pages: main:/docs).
+`npm run build` skriver til `docs/` – **commit alltid `docs/` sammen med kodeendringer**,
+ellers oppdateres ikke siden. Workflowen i `.github/workflows/deploy.yml` er kun en
+manuell reserveløsning (workflow_dispatch) og skal ikke gjeninnføres som push-trigger
+(auto-commitene dens kolliderer med sesjonens pusher).
+
 Edge-funksjonen redeployes med Supabase MCP-verktøyet `deploy_edge_function`
 (prosjekt `ugpxjjufoxzsyfiegkzq`, navn `ai-assistent`) – hold `supabase/functions/ai-assistent/index.ts` i sync.
 
