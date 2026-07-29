@@ -55,6 +55,13 @@ npm run build    # typesjekk + produksjonsbygg (kjør alltid før push)
 Edge-funksjonen redeployes med Supabase MCP-verktøyet `deploy_edge_function`
 (prosjekt `ugpxjjufoxzsyfiegkzq`, navn `ai-assistent`) – hold `supabase/functions/ai-assistent/index.ts` i sync.
 
+## Bilder
+
+Familiebilder ligger i `public/bilder/` (nedskalert for nett), sortert med prefiksene
+`par-*`, `familie-*`, `hverdag-*` og `nyfodt-*` – se `public/bilder/README.md`.
+Galleriet på invitasjonssiden styres av `GALLERI`-listen i `src/pages/Invitasjon.tsx`.
+Mappen er offentlig – aldri legg inn bilder brudeparet ikke eksplisitt vil dele.
+
 ## Konvensjoner
 
 - All tekst mot brukerne er på norsk (bokmål).

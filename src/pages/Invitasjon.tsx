@@ -36,6 +36,20 @@ const FALLBACK: InvitasjonData = {
   kontakt: [],
 };
 
+const bilde = (navn: string) => import.meta.env.BASE_URL + "bilder/" + navn;
+
+const GALLERI: { fil: string; alt: string }[] = [
+  { fil: "familie-sommer.jpg", alt: "Familien en sommerdag" },
+  { fil: "par-sjoen.jpg", alt: "Richard og Jennie ved sjøen" },
+  { fil: "familie-jul.jpg", alt: "Familien foran juletreet" },
+  { fil: "hverdag-snomann.jpg", alt: "Snømannbygging om vinteren" },
+  { fil: "familie-kirken.jpg", alt: "Familien i kirken" },
+  { fil: "hverdag-skogstur.jpg", alt: "Tur i skogen" },
+  { fil: "par-ultralyd.jpg", alt: "Richard og Jennie med ultralydbilder" },
+  { fil: "hverdag-lesestund.jpg", alt: "Lesestund hjemme" },
+  { fil: "par-iskrem.jpg", alt: "Richard og Jennie med iskrem om sommeren" },
+];
+
 function useNedtelling() {
   const [na, setNa] = useState(() => new Date());
   useEffect(() => {
@@ -86,14 +100,13 @@ export default function Invitasjon() {
     <div className="min-h-screen bg-cream-50">
       {/* Hero */}
       <header className="relative overflow-hidden bg-sage-800 text-cream-50">
-        <div className="absolute inset-0 opacity-[0.07]" aria-hidden>
-          <svg width="100%" height="100%">
-            <pattern id="blomst" width="80" height="80" patternUnits="userSpaceOnUse">
-              <circle cx="40" cy="40" r="1.5" fill="currentColor" />
-            </pattern>
-            <rect width="100%" height="100%" fill="url(#blomst)" />
-          </svg>
-        </div>
+        <img
+          src={bilde("par-flagg.jpg")}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-sage-900/75 via-sage-800/65 to-sage-900/85" aria-hidden />
         <div className="relative mx-auto max-w-3xl px-6 py-24 text-center sm:py-32">
           <p className="font-display text-lg italic tracking-widest text-gold-300">Sammen med våre familier</p>
           <h1 className="font-display mt-6 text-6xl font-medium sm:text-8xl">
@@ -124,9 +137,18 @@ export default function Invitasjon() {
       </header>
 
       {/* Velkommen */}
-      <section className="mx-auto max-w-2xl px-6 py-20 text-center">
-        <h2 className="font-display text-4xl text-sage-800">{data.overskrift}</h2>
-        <p className="mt-6 text-lg leading-relaxed text-sage-700">{data.velkomsttekst}</p>
+      <section className="mx-auto max-w-4xl px-6 py-20">
+        <div className="grid items-center gap-10 sm:grid-cols-2">
+          <img
+            src={bilde("par-barnevogn.jpg")}
+            alt="Richard og Jennie"
+            className="mx-auto w-full max-w-sm rotate-[-1.5deg] rounded-2xl border-8 border-white shadow-xl"
+          />
+          <div className="text-center sm:text-left">
+            <h2 className="font-display text-4xl text-sage-800">{data.overskrift}</h2>
+            <p className="mt-6 text-lg leading-relaxed text-sage-700">{data.velkomsttekst}</p>
+          </div>
+        </div>
       </section>
 
       {/* Vielse + fest */}
@@ -175,6 +197,25 @@ export default function Invitasjon() {
           </ol>
         </section>
       )}
+
+      {/* Galleri */}
+      <section className="bg-cream-100 py-20">
+        <div className="mx-auto max-w-5xl px-6">
+          <h2 className="font-display text-center text-4xl text-sage-800">Litt av oss</h2>
+          <p className="mt-4 text-center text-sage-700">Noen glimt fra livet vårt sammen.</p>
+          <div className="mt-10 columns-2 gap-4 sm:columns-3">
+            {GALLERI.map((b) => (
+              <img
+                key={b.fil}
+                src={bilde(b.fil)}
+                alt={b.alt}
+                loading="lazy"
+                className="mb-4 w-full rounded-xl shadow-sm transition-transform duration-300 hover:scale-[1.02]"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Praktisk info */}
       {data.praktisk.length > 0 && (
