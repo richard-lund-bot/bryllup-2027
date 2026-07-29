@@ -53,6 +53,74 @@ body {
   font-family: var(--font-serif);
 }
 
+/* Intro-splash («candy crush»-åpning av invitasjonen) */
+@keyframes intro-pop-inn {
+  0% { transform: scale(0.55) rotate(-5deg); opacity: 0; }
+  60% { transform: scale(1.06) rotate(1.5deg); opacity: 1; }
+  80% { transform: scale(0.97) rotate(-0.5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+@keyframes intro-puls {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.02) rotate(0.6deg); }
+}
+.intro-inn {
+  animation:
+    intro-pop-inn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both,
+    intro-puls 3.2s ease-in-out 0.9s infinite;
+}
+@keyframes intro-zoom-ut {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; }
+  30% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+  100% { transform: scale(1.8) rotate(-4deg); opacity: 0; }
+}
+.intro-ut {
+  animation: intro-zoom-ut 1s cubic-bezier(0.5, -0.28, 0.4, 1) both;
+}
+@keyframes intro-fade-ut {
+  to { opacity: 0; }
+}
+.intro-bakgrunn-ut {
+  animation: intro-fade-ut 0.85s ease 0.3s both;
+  pointer-events: none;
+}
+@keyframes intro-hint-hopp {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.05); }
+}
+.intro-hint {
+  animation: intro-hint-hopp 1.6s ease-in-out infinite;
+}
+@keyframes intro-svev-anim {
+  0%, 100% { transform: translateY(0) rotate(-6deg); opacity: 0.75; }
+  50% { transform: translateY(-14px) rotate(8deg); opacity: 1; }
+}
+.intro-svev {
+  animation: intro-svev-anim 3s ease-in-out infinite;
+}
+.intro-konfetti {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 9px;
+  height: 13px;
+  border-radius: 2px;
+  animation: intro-konfetti-burst 0.95s ease-out both;
+}
+@keyframes intro-konfetti-burst {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); opacity: 1; }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)) scale(0.5);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-inn, .intro-ut, .intro-hint, .intro-svev, .intro-konfetti {
+    animation-duration: 0.01s !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
 /* Tabeller i planleggeren */
 .plan-table th {
   @apply text-left text-xs font-semibold uppercase tracking-wide text-sage-600 px-3 py-2 border-b border-cream-300 whitespace-nowrap;

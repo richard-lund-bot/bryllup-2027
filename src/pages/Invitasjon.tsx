@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import type { WishlistItem } from "../lib/types";
 import { BRYLLUPSDATO, formatNOK } from "../lib/utils";
+import IntroSplash, { skalViseIntro } from "../components/IntroSplash";
 
 interface ProgramPunkt {
   tid: string;
@@ -70,6 +71,7 @@ function useNedtelling() {
 export default function Invitasjon() {
   const [data, setData] = useState<InvitasjonData>(FALLBACK);
   const [onsker, setOnsker] = useState<WishlistItem[]>([]);
+  const [visIntro, setVisIntro] = useState(skalViseIntro);
   const nedtelling = useNedtelling();
 
   useEffect(() => {
@@ -98,6 +100,8 @@ export default function Invitasjon() {
 
   return (
     <div className="min-h-screen bg-cream-50">
+      {visIntro && <IntroSplash onFerdig={() => setVisIntro(false)} />}
+
       {/* Hero */}
       <header className="relative overflow-hidden bg-sage-800 text-cream-50">
         <img
