@@ -209,15 +209,12 @@ Deno.serve(async (req: Request) => {
     let svarTekst = "";
     for (let runde = 0; runde < 12; runde++) {
       // deno-lint-ignore no-explicit-any
-      const respons: any = await anthropic.beta.messages.create({
-        model: "claude-opus-5",
+      const respons: any = await anthropic.messages.create({
+        model: "claude-sonnet-5",
         max_tokens: 8000,
         system: SYSTEM,
         messages: samtale,
         tools,
-        // Fallback ved ev. sikkerhetsavslag – svarer med Opus 4.8 i stedet for å feile
-        betas: ["server-side-fallback-2026-07-01"],
-        fallbacks: "default",
         // deno-lint-ignore no-explicit-any
       } as any);
 

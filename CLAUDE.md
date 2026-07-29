@@ -9,7 +9,7 @@ med fest i hagen hjemme (ca. 45 gjester, kokk på husets kjøkken).
 |---|---|---|
 | Frontend | Vite + React + TypeScript + Tailwind v4 | `src/` – deployes til GitHub Pages via `.github/workflows/deploy.yml` |
 | Database + auth | Supabase-prosjekt **Bryllup 2027**, id `ugpxjjufoxzsyfiegkzq` (region eu-north-1) | Tabeller i `public`-skjemaet |
-| AI-assistent | Supabase Edge Function `ai-assistent` som kaller Claude API (`claude-opus-5`) med CRUD-verktøy | `supabase/functions/ai-assistent/index.ts` |
+| AI-assistent | Supabase Edge Function `ai-assistent` som kaller Claude API (`claude-sonnet-5`) med CRUD-verktøy | `supabase/functions/ai-assistent/index.ts` |
 
 - Offentlig invitasjonsside: rute `/` (`src/pages/Invitasjon.tsx`) – RSVP-skjema og ønskeliste med reservasjon.
 - Planleggingsverktøy: rute `/plan` (`src/pages/plan/`) – krever innlogging; kun `richard-lund@hotmail.com` og

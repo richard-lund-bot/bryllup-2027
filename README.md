@@ -38,7 +38,7 @@ endre hele arbeidsboken i naturlig språk: «Flytt middagen til 17.30», «Legg 
   (deployes automatisk av `.github/workflows/deploy.yml` ved push)
 - **Database og innlogging:** Supabase-prosjektet «Bryllup 2027» (gratisnivå) med
   radnivåsikkerhet – kun brudeparets to kontoer kan endre data
-- **AI:** Supabase Edge Function `ai-assistent` som kaller Claude API (`claude-opus-5`)
+- **AI:** Supabase Edge Function `ai-assistent` som kaller Claude API (`claude-sonnet-5`)
 
 ### Publisering
 
