@@ -20,10 +20,39 @@ export default function AiAssistent({ onLukk }: { onLukk: () => void }) {
   const [jobber, setJobber] = useState(false);
   const [feil, setFeil] = useState<string | null>(null);
   const bunn = useRef<HTMLDivElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     bunn.current?.scrollIntoView({ behavior: "smooth" });
   }, [meldinger, jobber]);
+
+  // Lås siden bak panelet
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  // Chat-app-oppførsel på mobil: panelet følger det synlige området, slik at
+  // toppen ligger fast og skrivefeltet klistres rett over tastaturet.
+  useEffect(() => {
+    const vv = window.visualViewport;
+    const el = panel.current;
+    if (!vv || !el) return;
+    const juster = () => {
+      el.style.height = `${vv.height}px`;
+      el.style.transform = `translateY(${vv.offsetTop}px)`;
+      bunn.current?.scrollIntoView({ block: "end" });
+    };
+    juster();
+    vv.addEventListener("resize", juster);
+    vv.addEventListener("scroll", juster);
+    return () => {
+      vv.removeEventListener("resize", juster);
+      vv.removeEventListener("scroll", juster);
+    };
+  }, []);
 
   const send = async (innhold?: string) => {
     const melding = (innhold ?? tekst).trim();
@@ -64,7 +93,13 @@ export default function AiAssistent({ onLukk }: { onLukk: () => void }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end" role="dialog" aria-label="AI-assistent">
+    <div
+      ref={panel}
+      className="fixed left-0 top-0 z-50 flex w-full justify-end"
+      style={{ height: "100dvh" }}
+      role="dialog"
+      aria-label="AI-assistent"
+    >
       <div className="absolute inset-0 bg-sage-900/30" onClick={onLukk} />
       <div className="relative flex h-full w-full max-w-md flex-col bg-white shadow-2xl">
         <header className="flex items-center justify-between border-b border-cream-300 px-5 py-4">
@@ -77,7 +112,7 @@ export default function AiAssistent({ onLukk }: { onLukk: () => void }) {
           </button>
         </header>
 
-        <div className="flex-1 space-y-4 overflow-y-auto px-5 py-4">
+        <div className="flex-1 space-y-4 overflow-y-auto overscroll-contain px-5 py-4">
           {meldinger.length === 0 && (
             <div className="space-y-3">
               <p className="text-sm text-sage-700">
@@ -129,7 +164,7 @@ export default function AiAssistent({ onLukk }: { onLukk: () => void }) {
               onChange={(e) => setTekst(e.target.value)}
               placeholder="Spør eller be om en endring …"
               className="plan-input flex-1"
-              disabled={jobber}
+              enterKeyHint="send"
               autoFocus
             />
             <button type="submit" disabled={jobber || !tekst.trim()} className="btn-primary">
