@@ -69,17 +69,6 @@ Deno.serve(async (req: Request) => {
       return json({ error: "Ikke tilgang." }, 403);
     }
 
-    const apiKey = Deno.env.get("ANTHROPIC_API_KEY");
-    if (!apiKey) {
-      return json(
-        {
-          error:
-            "ANTHROPIC_API_KEY er ikke satt. Gå til Supabase-dashbordet → Edge Functions → Secrets og legg inn en API-nøkkel fra console.anthropic.com.",
-        },
-        500,
-      );
-    }
-
     const { messages } = await req.json();
     if (!Array.isArray(messages) || messages.length === 0) {
       return json({ error: "Mangler meldinger." }, 400);
@@ -90,6 +79,22 @@ Deno.serve(async (req: Request) => {
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
+
+    // API-nøkkel: secret i miljøet, ellers kryptert i Supabase Vault
+    let apiKey = Deno.env.get("ANTHROPIC_API_KEY");
+    if (!apiKey) {
+      const { data: hemmelig } = await db.rpc("hent_hemmelighet", { navn: "ANTHROPIC_API_KEY" });
+      apiKey = (hemmelig as string | null) ?? undefined;
+    }
+    if (!apiKey) {
+      return json(
+        {
+          error:
+            "ANTHROPIC_API_KEY er ikke satt. Gå til Supabase-dashbordet → Edge Functions → Secrets og legg inn en API-nøkkel fra console.anthropic.com.",
+        },
+        500,
+      );
+    }
 
     const anthropic = new Anthropic({ apiKey });
 
