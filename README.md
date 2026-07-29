@@ -40,16 +40,15 @@ endre hele arbeidsboken i naturlig språk: «Flytt middagen til 17.30», «Legg 
   radnivåsikkerhet – kun brudeparets to kontoer kan endre data
 - **AI:** Supabase Edge Function `ai-assistent` som kaller Claude API (`claude-opus-5`)
 
-### Aktivere nettsiden (engangssteg)
+### Publisering
 
-Alt bygges og publiseres automatisk til `gh-pages`-grenen, men GitHub krever at Pages
-aktiveres manuelt én gang:
+Alt ligger på `main`: kildekoden i `src/` og den ferdigbygde siden i `docs/`.
+GitHub Pages serverer `main:/docs` ([Settings → Pages](https://github.com/richard-lund-bot/bryllup-2027/settings/pages):
+Source *Deploy from a branch*, gren **main**, mappe **/docs**).
 
-1. Gå til [Settings → Pages](https://github.com/richard-lund-bot/bryllup-2027/settings/pages)
-2. Under **Build and deployment** → **Source**: velg *Deploy from a branch*
-3. Velg gren **gh-pages** og mappe **/ (root)** → **Save**
-
-Etter et par minutter er siden live på `https://richard-lund-bot.github.io/bryllup-2027/`.
+Workflowen `.github/workflows/deploy.yml` bygger automatisk på nytt og oppdaterer
+`docs/` ved hver push til `main`. Etter kodeendringer lokalt: kjør `npm run build`
+og commit `docs/`-mappen sammen med endringene.
 
 ### Kjøre lokalt
 
