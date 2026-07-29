@@ -41,7 +41,7 @@ const bilde = (navn: string) => import.meta.env.BASE_URL + "bilder/" + navn;
 const GALLERI: { fil: string; alt: string }[] = [
   { fil: "familie-sommer.jpg", alt: "Familien en sommerdag" },
   { fil: "par-sjoen.jpg", alt: "Richard og Jennie ved sjøen" },
-  { fil: "familie-jul.jpg", alt: "Familien foran juletreet" },
+  { fil: "par-barnevogn.jpg", alt: "Richard og Jennie på 17. mai" },
   { fil: "hverdag-snomann.jpg", alt: "Snømannbygging om vinteren" },
   { fil: "familie-kirken.jpg", alt: "Familien i kirken" },
   { fil: "hverdag-skogstur.jpg", alt: "Tur i skogen" },
@@ -140,8 +140,8 @@ export default function Invitasjon() {
       <section className="mx-auto max-w-4xl px-6 py-20">
         <div className="grid items-center gap-10 sm:grid-cols-2">
           <img
-            src={bilde("par-barnevogn.jpg")}
-            alt="Richard og Jennie"
+            src={bilde("familie-jul.jpg")}
+            alt="Familien vår foran juletreet"
             className="mx-auto w-full max-w-sm rotate-[-1.5deg] rounded-2xl border-8 border-white shadow-xl"
           />
           <div className="text-center sm:text-left">
