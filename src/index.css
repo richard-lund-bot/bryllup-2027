@@ -28,6 +28,13 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Siden skal aldri kunne rulles sideveis – brede tabeller ruller i egen
+   kontainer (overflow-x-auto), ikke hele siden */
+html,
+body {
+  overflow-x: hidden;
+}
+
 /* Slå av dobbelttrykk-zoom (panorering og scrolling påvirkes ikke) */
 * {
   touch-action: manipulation;
