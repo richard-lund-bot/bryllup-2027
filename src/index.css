@@ -25,6 +25,12 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Slå av dobbelttrykk-zoom (panorering og scrolling påvirkes ikke) */
+* {
+  touch-action: manipulation;
 }
 
 body {
