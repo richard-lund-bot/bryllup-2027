@@ -70,7 +70,7 @@ export default function Bordplassering() {
         </button>
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
         {/* Uplasserte gjester */}
         <div className="rounded-2xl border border-dashed border-sage-200 bg-cream-100 p-4">
           <h2 className="font-display text-lg text-sage-800">Uten bord ({uplasserte.length})</h2>
@@ -93,7 +93,7 @@ export default function Bordplassering() {
         </div>
 
         {/* Bordene */}
-        <div className="grid gap-5 sm:grid-cols-2 lg:col-span-2">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:col-span-2">
           {bord.map((b) => {
             const vedBordet = gjester.filter((g) => g.table_id === b.id);
             const fullt = vedBordet.length >= b.capacity;

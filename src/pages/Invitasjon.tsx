@@ -138,7 +138,7 @@ export default function Invitasjon() {
 
       {/* Velkommen */}
       <section className="mx-auto max-w-4xl px-6 py-20">
-        <div className="grid items-center gap-10 sm:grid-cols-2">
+        <div className="grid grid-cols-1 items-center gap-10 sm:grid-cols-2">
           <img
             src={bilde("familie-jul.jpg")}
             alt="Familien vår foran juletreet"
@@ -153,7 +153,7 @@ export default function Invitasjon() {
 
       {/* Vielse + fest */}
       <section className="bg-cream-100 py-16">
-        <div className="mx-auto grid max-w-4xl gap-8 px-6 sm:grid-cols-2">
+        <div className="mx-auto grid grid-cols-1 max-w-4xl gap-8 px-6 sm:grid-cols-2">
           <div className="rounded-2xl border border-cream-300 bg-white p-8 text-center shadow-sm">
             <div className="text-4xl">⛪</div>
             <h3 className="font-display mt-4 text-2xl text-sage-800">Vielsen</h3>
@@ -222,7 +222,7 @@ export default function Invitasjon() {
         <section className="bg-sage-800 py-20 text-cream-50">
           <div className="mx-auto max-w-4xl px-6">
             <h2 className="font-display text-center text-4xl">Praktisk informasjon</h2>
-            <div className="mt-12 grid gap-x-12 gap-y-8 sm:grid-cols-2">
+            <div className="mt-12 grid grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-2">
               {data.praktisk.map((p, i) => (
                 <div key={i}>
                   <h3 className="font-display text-xl text-gold-300">{p.tittel}</h3>
@@ -357,7 +357,7 @@ function RsvpSkjema() {
         <input name="navn" required className="plan-input mt-1" placeholder="F.eks. Kari og Ola Nordmann" />
       </label>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <label className="block">
           <span className="text-sm font-medium text-sage-800">E-post</span>
           <input name="epost" type="email" className="plan-input mt-1" />
@@ -370,7 +370,7 @@ function RsvpSkjema() {
 
       {kommer === "ja" && (
         <>
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <label className="block">
               <span className="text-sm font-medium text-sage-800">Antall voksne</span>
               <input name="voksne" type="number" min={1} max={10} defaultValue={1} className="plan-input mt-1" />

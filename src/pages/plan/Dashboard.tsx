@@ -63,7 +63,7 @@ export default function Dashboard() {
       </div>
 
       {/* Nøkkeltall */}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <Kort tittel="Dager igjen" verdi={String(dagerIgjen())} under="til 7. august 2027" emoji="💍" />
         <Kort tittel="Fremdrift masterplan" verdi={`${fremdrift} %`} under={`${ferdige} av ${oppgaver.length} oppgaver ferdig`} emoji="✅">
           <div className="mt-2 h-2 overflow-hidden rounded-full bg-cream-200">
@@ -93,7 +93,7 @@ export default function Dashboard() {
         />
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Kritiske oppgaver */}
         <div className="rounded-2xl border border-cream-300 bg-white p-5">
           <div className="flex items-center justify-between">

@@ -58,7 +58,7 @@ export default function Budsjett() {
         <p className="text-sm text-sage-600">Estimat, faktiske kostnader og betalingsstatus</p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <div className="rounded-2xl border border-cream-300 bg-white p-4">
           <p className="text-sm text-sage-600">Totalramme</p>
           <input
